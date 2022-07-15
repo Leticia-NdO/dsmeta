@@ -7,16 +7,15 @@ type Props = {
     id: number
 }
 
+function notify(id: number) {
+    axios.get(`${BASE_URL}/sales/${id}/notification`)
+}
 
-function NotificationButton(props: Props) {
 
-    function notify() {
-        axios.get(`${BASE_URL}/sales/${props.id}/notification`)
-    }
-
+function NotificationButton({ id }: Props) {
     return (
         <>
-            <div className="dsmeta-red-btn" onClick={() => notify()}>
+            <div className="dsmeta-red-btn" onClick={() => notify(id)}>
                 <img src={icon} alt="Notificar" />
             </div>
         </>
