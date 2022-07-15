@@ -2,7 +2,8 @@ import './styles.css'
 import NotificationButton from '../NotificationButton'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 function SalesCard() {
 
@@ -11,7 +12,13 @@ function SalesCard() {
 
     const [minDate, setMinDate] = useState(min)
     const [maxDate, setMaxDate] = useState(max)
-    
+
+    useEffect(() => {
+        axios.get("http://localhost:8080/sales/").then((sales) => {
+            console.log(sales.data)
+        })
+    }, [])
+
 
     return (
 
@@ -21,7 +28,7 @@ function SalesCard() {
                 <div className="dsmeta-form-control-container">
                     <DatePicker
                         selected={minDate}
-                        onChange={(date: Date) => {setMinDate(date)}}
+                        onChange={(date: Date) => { setMinDate(date) }}
                         className="dsmeta-form-control"
                         dateFormat="dd/MM/yyyy"
                     />
@@ -29,7 +36,7 @@ function SalesCard() {
                 <div className="dsmeta-form-control-container">
                     <DatePicker
                         selected={maxDate}
-                        onChange={(date: Date) => {setMaxDate(date)}}
+                        onChange={(date: Date) => { setMaxDate(date) }}
                         className="dsmeta-form-control"
                         dateFormat="dd/MM/yyyy"
                     />
